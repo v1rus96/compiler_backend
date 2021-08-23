@@ -10,7 +10,7 @@ const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-const generateFile = async (format, content) => {
+const generateFile = (format, content) => {
   const jobId = uuid();
   var urlR
   const s3Params = {
