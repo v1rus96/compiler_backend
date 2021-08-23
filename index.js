@@ -8,14 +8,9 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  },
-  (err) => {
-    if(err) {
-      console.error(err);
-    } 
-    console.log("Successfully connected to MongoDB: compilerdb");
-  }
-);
+  })
+  .then(() => console.log("MongoDb connected"))
+ .catch(err => console.log(err));
 
 const { generateFile } = require("./generateFile");
 
