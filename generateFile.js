@@ -27,7 +27,7 @@ const generateFile = async (format, content) => {
     console.log(`${data.Location}`)
     url = `${data.Location}`
   });
-  return url.toString()
+  return url
 };
 
 module.exports = {
