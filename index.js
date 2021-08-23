@@ -3,8 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 mongoose.set('bufferCommands', false);
 
-mongoose.connect(
-  "mongodb+srv://kidocode:kidocode@ktrialinfo.kbp1y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+await mongoose.connect(
+  "https://localhost/compilerdb",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
