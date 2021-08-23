@@ -19,7 +19,7 @@ const generateFile = async (format, content) => {
     if(err){
       console.log(err);
     }
-    return `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+    return `https://${S3_BUCKET}.s3.amazonaws.com/${jobId}`
   });
 };
 
