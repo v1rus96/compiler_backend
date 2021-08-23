@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const uri = process.env.MONGODB_URI;
-
+console.log(uri);
 mongoose.connect(
   uri,
   {
