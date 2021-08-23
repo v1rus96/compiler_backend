@@ -49,8 +49,10 @@ app.get("/status", async (req, res) => {
       .status(400)
       .json({ success: false, error: "missing id query param" });
   }
-
-  const job = await Job.findById(jobId);
+  let job
+  if (jobId.match(/^[0-9a-fA-F]{24}$/)) {
+     job = await Job.findById(jobId);
+  }
 
   if (job === undefined) {
     return res.status(400).json({ success: false, error: "couldn't find job" });
