@@ -43,7 +43,7 @@ app.post("/run", async (req, res) => {
 
 app.get("/status", async (req, res) => {
   const jobId = req.query.id;
-
+  console.log(jobId);
   if (jobId === undefined) {
     return res
       .status(400)
