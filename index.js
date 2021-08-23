@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  process.env.MONGODB_URI,
+  "mongodb://localhost/compilerdb",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
