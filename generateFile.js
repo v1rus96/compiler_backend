@@ -12,14 +12,14 @@ const generateFile = async (format, content) => {
     Bucket: S3_BUCKET,
     Key: `${jobId}`,
     Expires: 60,
-    ContentType: `${format}`,
+    ContentType: `${jobId}.${format}`,
     ACL: 'public-read'
   };
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+  s3.upload(s3Params, (err, data) => {
     if(err){
       console.log(err);
     }
-    return `https://${S3_BUCKET}.s3.amazonaws.com/${jobId}`
+    return `https://${S3_BUCKET}.s3.amazonaws.com/${jobId}.${format}`
   });
 };
 
