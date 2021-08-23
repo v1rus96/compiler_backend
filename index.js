@@ -42,17 +42,15 @@ app.post("/run", async (req, res) => {
 });
 
 app.get("/status", async (req, res) => {
-  const jobId = req.headers['x-request-id'];
+  const jobId = req.query.id;
   console.log(jobId);
   if (jobId === undefined) {
     return res
       .status(400)
       .json({ success: false, error: "missing id query param" });
   }
-  let job
-  if (jobId.match(/^[0-9a-fA-F]{24}$/)) {
-     job = await Job.findById(jobId);
-  }
+
+  const job = await Job.findById(jobId);
 
   if (job === undefined) {
     return res.status(400).json({ success: false, error: "couldn't find job" });
