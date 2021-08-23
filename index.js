@@ -1,15 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const uri = process.env.MONGODB_URI;
 
 mongoose.connect(
-  "mongodb://localhost/compilerdb",
+  uri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
   (err) => {
-    err && console.error(err);
+    if(err) {
+      console.error(err);
+    } 
     console.log("Successfully connected to MongoDB: compilerdb");
   }
 );
