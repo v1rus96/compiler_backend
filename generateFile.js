@@ -4,16 +4,20 @@ const { v4: uuid } = require("uuid");
 const aws = require('aws-sdk');
 aws.config.region = 'ap-southeast-1';
 const S3_BUCKET = process.env.S3_BUCKET;
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
 
 const generateFile = async (format, content) => {
   const jobId = uuid();
-  const s3 = new aws.S3();
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: `${jobId}`,
     Expires: 60,
     ContentType: `${jobId}.${format}`,
-    ACL: 'public-read'
+    ACL: 'public-read',
+    Body: content
   };
   s3.upload(s3Params, (err, data) => {
     if(err){
