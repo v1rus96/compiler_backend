@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { v4: uuid } = require("uuid");
+var url = require('url');
 const aws = require('aws-sdk');
 aws.config.region = 'ap-southeast-1';
 const S3_BUCKET = process.env.S3_BUCKET;
@@ -11,7 +12,7 @@ const s3 = new aws.S3({
 
 const generateFile = async (format, content) => {
   const jobId = uuid();
-  var url
+  var urlR
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: `${jobId}.${format}`,
@@ -25,10 +26,10 @@ const generateFile = async (format, content) => {
       console.log(err);
     }
     console.log(`${data.Location}`)
-    url = `${data.Location}`
+     urlR = url.parse(`${data.Location}`, true);
   });
-  console.log("URL:" + url)
-  return url
+  console.log("URL:" + urlR)
+  return urlR
 };
 
 module.exports = {
