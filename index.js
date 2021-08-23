@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://kidocode:kidocode@ktrialinfo.kbp1y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  process.env.MONGODB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
