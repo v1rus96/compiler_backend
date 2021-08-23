@@ -23,8 +23,8 @@ const generateFile = async (format, content) => {
     if(err){
       console.log(err);
     }
-    console.log(`https://${S3_BUCKET}.s3.amazonaws.com/${data.Location}`)
-    return `https://${S3_BUCKET}.s3.amazonaws.com/${data.Location}`
+    console.log(`${data.Location}`)
+    return `${data.Location}`
   });
 };
 
