@@ -13,7 +13,7 @@ const generateFile = async (format, content) => {
   const jobId = uuid();
   const s3Params = {
     Bucket: S3_BUCKET,
-    Key: `${jobId}`,
+    Key: `${jobId}.${format}`,
     Expires: 60,
     ContentType: `${jobId}.${format}`,
     ACL: 'public-read',
@@ -23,7 +23,8 @@ const generateFile = async (format, content) => {
     if(err){
       console.log(err);
     }
-    return `https://${S3_BUCKET}.s3.amazonaws.com/${jobId}.${format}`
+    console.log(`https://${S3_BUCKET}.s3.amazonaws.com/${data.Location}`)
+    return `https://${S3_BUCKET}.s3.amazonaws.com/${data.Location}`
   });
 };
 
