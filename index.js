@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-mongoose.set('bufferCommands', false);
 
-await mongoose.connect(
-  "https://localhost/compilerdb",
+mongoose.connect(
+  "mongodb+srv://kidocode:kidocode@ktrialinfo.kbp1y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
