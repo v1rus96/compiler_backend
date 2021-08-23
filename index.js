@@ -2,15 +2,20 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const uri = process.env.MONGODB_URI;
-console.log(uri);
-mongoose.connect(
-  uri,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDb connected"))
- .catch(err => console.log(err));
+
+const connectDB = async () => {
+  try {
+      await mongoose.connect(uri, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+      });
+      console.log('MongoDB connected!!');
+  } catch (err) {
+      console.log('Failed to connect to MongoDB', err);
+  }
+};
+
+connectDB();
 
 const { generateFile } = require("./generateFile");
 
