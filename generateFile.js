@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const { v4: uuid } = require("uuid");
-var url = require('url');
 const aws = require('aws-sdk');
 aws.config.region = 'ap-southeast-1';
 const S3_BUCKET = process.env.S3_BUCKET;
@@ -10,9 +9,9 @@ const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-const generateFile = (format, content) => {
+const generateFile = async (format, content) => {
   const jobId = uuid();
-  var urlR
+  const filePath = `https://compiler-bucket.s3.ap-southeast-1.amazonaws.com/${jobId}.${format}`
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: `${jobId}.${format}`,
@@ -26,10 +25,8 @@ const generateFile = (format, content) => {
       console.log(err);
     }
     console.log(`${data.Location}`)
-     urlR = url.parse(`${data.Location}`, true);
   });
-  console.log("URL:" + urlR)
-  return urlR
+  return filePath
 };
 
 module.exports = {
