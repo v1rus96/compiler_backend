@@ -38,7 +38,7 @@ app.post("/run", async (req, res) => {
   }
   // need to generate a c++ file with content from the request
   const filepath = await generateFile(language, code);
-  console.log("FILE" + typeof filepath)
+  console.log("FILE" + filepath)
   // write into DB
   const job = await new Job({ language, filepath }).save();
   const jobId = job["_id"];

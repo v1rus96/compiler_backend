@@ -11,7 +11,7 @@ const s3 = new aws.S3({
 
 const generateFile = async (format, content) => {
   const jobId = uuid();
-  let url
+  var url
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: `${jobId}.${format}`,
@@ -27,6 +27,7 @@ const generateFile = async (format, content) => {
     console.log(`${data.Location}`)
     url = `${data.Location}`
   });
+  console.log("URL:" + url)
   return url
 };
 
