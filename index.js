@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const connect = mongoose.connect(
+const connect = await mongoose.connect(
   "mongodb+srv://kidocode:kidocode@ktrialinfo.kbp1y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
