@@ -8,15 +8,21 @@ const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
-
+const dirCodes = path.join(__dirname, "codes");
+if (!fs.existsSync(dirCodes)) {
+  fs.mkdirSync(dirCodes, { recursive: true });
+}
 const generateFile = async (format, content) => {
   const jobId = uuid();
-  const filePath = `https://compiler-bucket.s3.ap-southeast-1.amazonaws.com/${jobId}.${format}`
+  const filename = `${jobId}.${format}`;
+  const filepath = path.join(dirCodes, filename);
+  await fs.writeFileSync(filepath, content);
+  const fileURL = `https://compiler-bucket.s3.ap-southeast-1.amazonaws.com/${jobId}.${format}`
   const s3Params = {
     Bucket: S3_BUCKET,
-    Key: `${jobId}.${format}`,
+    Key: filename,
     Expires: 60,
-    ContentType: `${jobId}.${format}`,
+    ContentType: filename,
     ACL: 'public-read',
     Body: content
   };
@@ -26,7 +32,7 @@ const generateFile = async (format, content) => {
     }
     console.log(`${data.Location}`)
   });
-  return filePath
+  return filepath
 };
 
 module.exports = {
